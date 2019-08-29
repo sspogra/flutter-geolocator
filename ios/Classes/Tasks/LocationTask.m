@@ -37,6 +37,9 @@
     _locationManager.desiredAccuracy = accuracy;
     _locationManager.distanceFilter = distanceFilter;
     _locationManager.pausesLocationUpdatesAutomatically = false;// Changes by shiv pogra
+        if([_locationManager respondsToSelector:@selector(allowsBackgroundLocationUpdates)]){
+        [_locationManager setAllowsBackgroundLocationUpdates:YES];
+    }
 }
 
 - (void)stopTask {
@@ -94,7 +97,7 @@
 - (void)startTask {
     [super startTask];
     
-    [_locationManager requestWhenInUseAuthorization];
+    [_locationManager requestAlwaysAuthorization];
     
     if (@available(iOS 9.0, *)) {
         [_locationManager requestLocation];
